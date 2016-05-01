@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/nepalicalendar/nepalicalendar-py.png)](https://travis-ci.org/nepalicalendar/nepalicalendar-py)
+
 nepalicalendar-py
 =================
 
