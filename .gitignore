@@ -1,0 +1,8 @@
+*.pyc
+
+# temporary files created by VIM
+*.swp
+*.swo
+
+# temporary files created by git/patch
+*.orig
