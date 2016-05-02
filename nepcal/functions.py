@@ -2,7 +2,6 @@
 """
 Provides nepali calendar related functions
 """
-from .nepdate import nepdate
 from . import values
 
 def check_valid_ad_range(date):
@@ -19,7 +18,7 @@ def check_valid_bs_range(date):
     """
     ERR_MSG = "%s out of range" % str(date)
 
-    if date.year < values.MIN_NEPALI_YEAR or date.year > values.MAX_NEPALI_YEAR:
+    if date.year < values.START_NP_YEAR or date.year > values.END_NP_YEAR:
         raise ValueError(ERR_MSG)
     if date.month < 1 or date.month > 12:
         raise ValueError(ERR_MSG)

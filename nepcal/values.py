@@ -5,7 +5,7 @@ nepalicalendar
 """
 
 import sys
-from datetime import date
+import datetime
 
 NEPALI_MONTH_NAMES_EN = {
     1: u"Baisakh",
@@ -56,21 +56,6 @@ NEPALI_WEEKDAY_NAMES_SHORT_NE = {
     6: u"शुक्र",
     1: u"शनि",
 }
-
-MIN_NEPALI_YEAR = 2000
-MAX_NEPALI_YEAR = 2090
-
-START_EN_YEAR = 1943
-START_EN_MONTH = 4
-START_EN_DAY = 23
-
-
-END_EN_YEAR = 2034
-END_EN_MONTH = 4
-END_EN_DAY = 13
-
-START_EN_DATE = date(START_EN_YEAR, START_EN_MONTH, START_EN_DAY)
-END_EN_DATE = date(END_EN_YEAR, END_EN_MONTH, END_EN_DAY)
 
 # Number of days in months of each year
 NEPALI_MONTH_DAY_DATA = {
@@ -166,3 +151,18 @@ NEPALI_MONTH_DAY_DATA = {
     2089: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30],
     2090: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30],
 }
+
+START_NP_YEAR = 2000
+END_NP_YEAR = 2090
+
+START_EN_YEAR = 1943
+START_EN_MONTH = 4
+START_EN_DAY = 14
+
+
+END_EN_YEAR = 2034
+END_EN_MONTH = 4
+END_EN_DAY = 13
+
+START_EN_DATE = datetime.date(START_EN_YEAR, START_EN_MONTH, START_EN_DAY)
+END_EN_DATE = datetime.date(END_EN_YEAR, END_EN_MONTH, END_EN_DAY)

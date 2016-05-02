@@ -5,7 +5,7 @@ Defines the nepdate class
 
 import sys
 from datetime import date
-
+from . import values, functions
 
 class nepdate(object):
     """
@@ -17,12 +17,49 @@ class nepdate(object):
         self.month = month
         self.day = day
 
+    def __eq__(self, other):
+        return self.year == other.year and \
+            self.month == other.month and \
+            self.day == other.day
+
+    def __add__(self, other):
+        """
+        Add operator
+        """
+        year = self.year
+        month = self.month
+        day = self.day
+
+        days_remain = other.days
+
+        while True:
+            # Make sure we're still in range
+            if year > values.END_NP_YEAR:
+                raise ValueError("Out of range")
+            # The current day + days in timedelta fits in within the current
+            # month
+            if days_remain + day <= values.NEPALI_MONTH_DAY_DATA[year][month-1]:
+                day = day + days_remain
+                return nepdate(year, month, day)
+            else:
+                days_remain -= values.NEPALI_MONTH_DAY_DATA[year][month-1] - day + 1
+                day = 1
+                month += 1
+                if month > 12:
+                    month = 1
+                    year += 1
+
     @classmethod
     def from_ad_date(cls, date):
         """
         Gets a nepdate object from gregorian calendar date
         """
-        return nepdate(date.year, date.month, date.day)
+        functions.check_valid_ad_range(date)
+        days = values.START_EN_DATE - date
+
+        # Add the required number of days to the start nepali date
+        start_date = nepdate(values.START_NP_YEAR, 1, 1)
+        return start_date + (date - values.START_EN_DATE)
 
     @classmethod
     def today():
