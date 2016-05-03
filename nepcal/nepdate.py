@@ -4,7 +4,7 @@ Defines the nepdate class
 """
 
 import sys
-from datetime import date
+from datetime import date, timedelta
 from . import values, functions
 
 
@@ -74,6 +74,72 @@ class nepdate(object):
                 if month > 12:
                     month = 1
                     year += 1
+
+    def __sub__(self, other):
+        """
+        Subtraction operator.
+        Returns a timedelta object
+        """
+        greater = self
+        smaller = other
+        multiplier = 1
+        if self < other:
+            greater = other
+            smaller = self
+            multiplier = -1
+
+        # Delta in days
+        num_days = 0
+        if greater.year > smaller.year:
+            # First of all, get the days remaining in the smaller year
+            # till year end
+            smaller_days_remain = nepdate(
+                smaller.year, 12, values.NEPALI_MONTH_DAY_DATA[
+                    smaller.year][12 - 1]
+            ) - smaller
+
+            year_remain = range(smaller.year + 1, greater.year)
+            for year in year_remain:
+                num_days += sum(values.NEPALI_MONTH_DAY_DATA[year])
+
+            # Find the days past in the greater year since january
+            greater_days_remain = greater - nepdate(greater.year, 1, 1) + timedelta(1)
+
+            total_days = timedelta(days=num_days) + \
+                greater_days_remain + \
+                smaller_days_remain
+
+            return multiplier * total_days
+
+        # Same year
+        if greater.month > smaller.month:
+            smaller_days_remain = nepdate(
+                smaller.year,
+                smaller.month,
+                values.NEPALI_MONTH_DAY_DATA[smaller.year][smaller.month-1]
+            ) - smaller
+
+            month_remain = range(smaller.month + 1, greater.month)
+            for month in month_remain:
+                num_days += values.NEPALI_MONTH_DAY_DATA[
+                    smaller.year][month - 1]
+
+            greater_days_remain = greater - nepdate(
+                greater.year, greater.month, 1) + timedelta(days=1)
+            # One is added to adjust for 1 gate. For example, if we're counting from
+            # biasakh 12 to jestha 18, it will count from baisakh 12 to baisakh 30
+            # Then again, from jeth 1 to jeth 18. In this process, jeth 1 is neglected
+            # Hence, 1 is added here
+
+            total_days = timedelta(days=num_days) + \
+                greater_days_remain + \
+                smaller_days_remain
+
+            return multiplier * total_days
+
+        # Same year and same month but different days
+        total_days = timedelta(days=greater.day - smaller.day)
+        return total_days
 
     @classmethod
     def from_ad_date(cls, date):

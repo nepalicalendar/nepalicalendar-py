@@ -52,11 +52,6 @@ class NepdateTestCase(unittest.TestCase):
             nepdate(2084, 3, 1)
         )
 
-
-
-
-
-
     def test_gt_operator(self):
         self.assertGreater(
             nepdate(2012, 12, 12),
@@ -120,6 +115,22 @@ class NepdateTestCase(unittest.TestCase):
                 NEPALI_MONTH_DAY_DATA[END_NP_YEAR][12 - 1]
             )
         )
+
+    def test_sub_operator(self):
+        date = nepdate(2012,2,12) - nepdate(2012,2,13)
+        self.assertEqual(date.days, 1)
+
+        date = nepdate(2012,2,12) - nepdate(2012,1,1)
+        self.assertEqual(date.days, 42)
+
+        date = nepdate(2073,1,6) - nepdate(2073,3,18)
+        self.assertEqual(date.days, -75)
+
+        date = nepdate(2072,11,6) - nepdate(2074,4,5)
+        self.assertEqual(date.days, -518)
+
+        #TODO: Add more tests
+
 
 
 if __name__ == '__main__':
