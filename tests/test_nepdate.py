@@ -21,6 +21,73 @@ class NepdateTestCase(unittest.TestCase):
         date2 = nepdate(2012, 12, 12)
         self.assertEqual(date1, date2)
 
+    def test_lt_operator(self):
+        self.assertLess(
+            nepdate(2054, 1, 18),
+            nepdate(2073, 12, 1)
+        )
+
+        self.assertLess(
+            nepdate(2000, 1, 18),
+            nepdate(2033, 2, 1)
+        )
+
+        self.assertLess(
+            nepdate(2054, 1, 18),
+            nepdate(2054, 1, 19)
+        )
+
+        self.assertFalse(
+            nepdate(2054, 1, 18) <
+            nepdate(2054, 1, 18)
+        )
+
+        self.assertTrue(
+            nepdate(2054, 1, 18) <=
+            nepdate(2054, 1, 18)
+        )
+
+        self.assertTrue(
+            nepdate(2054, 1, 18) <=
+            nepdate(2084, 3, 1)
+        )
+
+
+
+
+
+
+    def test_gt_operator(self):
+        self.assertGreater(
+            nepdate(2012, 12, 12),
+            nepdate(2012, 12, 11)
+        )
+
+        self.assertGreater(
+            nepdate(2013, 1, 10),
+            nepdate(2012, 12, 11)
+        )
+
+        self.assertFalse(
+            nepdate(2012, 1, 12) >
+            nepdate(2012, 12, 11)
+        )
+
+        self.assertTrue(
+            nepdate(2012, 12, 12) >=
+            nepdate(2012, 12, 12)
+        )
+
+        self.assertTrue(
+            nepdate(2012, 12, 12) >=
+            nepdate(2012, 12, 11)
+        )
+
+        self.assertFalse(
+            nepdate(2012, 12, 10) >=
+            nepdate(2012, 12, 11)
+        )
+
     def test_add_operator(self):
         """
         Test the addition operator with timedelta
@@ -47,9 +114,12 @@ class NepdateTestCase(unittest.TestCase):
 
         self.assertEqual(
             nepdate.from_ad_date(END_EN_DATE),
-            nepdate(END_NP_YEAR, 12, NEPALI_MONTH_DAY_DATA[END_NP_YEAR][12-1])
-        )
 
+            nepdate(
+                END_NP_YEAR, 12,
+                NEPALI_MONTH_DAY_DATA[END_NP_YEAR][12 - 1]
+            )
+        )
 
 
 if __name__ == '__main__':

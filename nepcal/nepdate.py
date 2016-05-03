@@ -7,6 +7,7 @@ import sys
 from datetime import date
 from . import values, functions
 
+
 class nepdate(object):
     """
     Represents nepali date
@@ -22,9 +23,33 @@ class nepdate(object):
             self.month == other.month and \
             self.day == other.day
 
+    def __gt__(self, other):
+        if self.year > other.year:
+            return True
+        elif self.year < other.year:
+            return False
+        else:
+            if self.month > other.month:
+                return True
+            elif self.month < other.month:
+                return False
+            else:
+                if self.day > other.day:
+                    return True
+                return False
+
+    def __ge__(self, other):
+        return self == other or self > other
+
+    def __lt__(self, other):
+        return (not self == other) and (not self > other)
+
+    def __le__(self, other):
+        return not self > other
+
     def __add__(self, other):
         """
-        Add operator
+        Add operator for timedelta
         """
         year = self.year
         month = self.month
@@ -38,11 +63,12 @@ class nepdate(object):
                 raise ValueError("Out of range")
             # The current day + days in timedelta fits in within the current
             # month
-            if days_remain + day <= values.NEPALI_MONTH_DAY_DATA[year][month-1]:
+            if days_remain + day <= values.NEPALI_MONTH_DAY_DATA[year][month - 1]:
                 day = day + days_remain
                 return nepdate(year, month, day)
             else:
-                days_remain -= values.NEPALI_MONTH_DAY_DATA[year][month-1] - day + 1
+                days_remain -= values.NEPALI_MONTH_DAY_DATA[
+                    year][month - 1] - day + 1
                 day = 1
                 month += 1
                 if month > 12:
@@ -62,7 +88,7 @@ class nepdate(object):
         return start_date + (date - values.START_EN_DATE)
 
     @classmethod
-    def today():
+    def today(today):
         """
         Returns today's date in nepali calendar
         """
