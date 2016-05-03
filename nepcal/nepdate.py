@@ -18,6 +18,8 @@ class nepdate(object):
         self.month = month
         self.day = day
 
+        self.en_date = None
+
     def __eq__(self, other):
         return self.year == other.year and \
             self.month == other.month and \
@@ -103,7 +105,8 @@ class nepdate(object):
                 num_days += sum(values.NEPALI_MONTH_DAY_DATA[year])
 
             # Find the days past in the greater year since january
-            greater_days_remain = greater - nepdate(greater.year, 1, 1) + timedelta(1)
+            greater_days_remain = greater - \
+                nepdate(greater.year, 1, 1) + timedelta(1)
 
             total_days = timedelta(days=num_days) + \
                 greater_days_remain + \
@@ -116,7 +119,7 @@ class nepdate(object):
             smaller_days_remain = nepdate(
                 smaller.year,
                 smaller.month,
-                values.NEPALI_MONTH_DAY_DATA[smaller.year][smaller.month-1]
+                values.NEPALI_MONTH_DAY_DATA[smaller.year][smaller.month - 1]
             ) - smaller
 
             month_remain = range(smaller.month + 1, greater.month)
@@ -154,6 +157,13 @@ class nepdate(object):
         return start_date + (date - values.START_EN_DATE)
 
     @classmethod
+    def from_bs_date(cls, year, month, day):
+        """
+        Create and update an nepdate object for bikram sambat date
+        """
+        return nepdate(year, month, day).update()
+
+    @classmethod
     def today(today):
         """
         Returns today's date in nepali calendar
@@ -172,3 +182,36 @@ class nepdate(object):
 
     def __str__(self):
         return self.__unicode__()
+
+    def weekday(self):
+        """
+        Returns weekday for the date.
+        0 : Aaitabar
+        6 : Sanibar
+        """
+        return (self.en_date.weekday() + 1) % 7
+
+    def en_weekday(self):
+        """
+        Returns weekday with each week starting in monday
+        monday = 0
+        sunday = 7
+        """
+        return self.en_date.weekday()
+
+    def update(self):
+        """
+        Updates information about the nepdate
+        """
+        # Here's a trick to find the gregorian date:
+        # We find the number of days from earliest nepali date to the current
+        # day. We then add the number of days to the earliest english date
+        self.en_date = values.START_EN_DATE + \
+            (
+                self - nepdate(
+                    values.START_NP_YEAR,
+                    1,
+                    1
+                )
+            )
+        return self
