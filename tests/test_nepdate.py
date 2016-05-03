@@ -177,6 +177,5 @@ class NepdateTestCase(unittest.TestCase):
             first_calc_date = added_date - timedelta(days=days)
             self.assertEqual(first_calc_date, np_date)
 
-
 if __name__ == '__main__':
     unittest.main()

@@ -20,6 +20,12 @@ class nepdate(object):
 
         self.en_date = None
 
+    def __unicode__(self):
+        return u"Bikram Sambat Date (%d:%d:%d)" % (self.year, self.month, self.day)
+
+    def __str__(self):
+        return self.__unicode__()
+
     def __eq__(self, other):
         return self.year == other.year and \
             self.month == other.month and \
@@ -72,7 +78,7 @@ class nepdate(object):
             # month
             if days_remain + day <= values.NEPALI_MONTH_DAY_DATA[year][month - 1]:
                 day = day + days_remain
-                return nepdate(year, month, day)
+                return nepdate(year, month, day).update()
             else:
                 days_remain -= values.NEPALI_MONTH_DAY_DATA[
                     year][month - 1] - day + 1
@@ -103,7 +109,7 @@ class nepdate(object):
                     raise ValueError("Out of range")
                 if days_remain < day:
                     day = day - days_remain
-                    return nepdate(year, month, day)
+                    return nepdate(year, month, day).update()
                 days_remain -= day
                 month = month - 1
                 if month < 1:
@@ -205,12 +211,6 @@ class nepdate(object):
         Returns a nepdate object created from timestamp
         """
         return nepdate.from_ad_date(date.fromtimestamp(timestamp))
-
-    def __unicode__(self):
-        return u"Bikram Sambat Date (%d:%d:%d)" % (self.year, self.month, self.day)
-
-    def __str__(self):
-        return self.__unicode__()
 
     def weekday(self):
         """
