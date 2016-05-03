@@ -59,6 +59,11 @@ class nepdate(object):
 
         days_remain = other.days
 
+        if days_remain == 0:
+            return self
+        elif days_remain < 0:
+            return self - (other * -1)
+
         while True:
             # Make sure we're still in range
             if year > values.END_NP_YEAR:
@@ -82,6 +87,30 @@ class nepdate(object):
         Subtraction operator.
         Returns a timedelta object
         """
+        if isinstance(other, timedelta):
+            # Subtract number of days from the date
+            days_remain = other.days
+            if days_remain == 0:
+                return self
+            elif days_remain < 0:
+                return self + (-1 * other)
+            # Subtract the number of days
+            year = self.year
+            month = self.month
+            day = self.day
+            while True:
+                if year < values.START_NP_YEAR:
+                    raise ValueError("Out of range")
+                if days_remain < day:
+                    day = day - days_remain
+                    return nepdate(year, month, day)
+                days_remain -= day
+                month = month - 1
+                if month < 1:
+                    month = 12
+                    year = year - 1
+                day = values.NEPALI_MONTH_DAY_DATA[year][month - 1]
+
         greater = self
         smaller = other
         multiplier = 1
