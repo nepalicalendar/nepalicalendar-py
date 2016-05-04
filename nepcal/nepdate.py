@@ -9,11 +9,17 @@ from . import values, functions
 
 
 class nepdate(object):
-    """
-    Represents nepali date
+    """ Nepali Date class that implements a single nepali date
     """
 
     def __init__(self, year, month, day):
+        """ Initializer for nepdate
+        Params:
+            year : Year of the date
+            month : Month of the date
+            day : Day of the date
+        English date is not updated in constructor. 'update' should
+        be called explicitly"""
         self.year = year
         self.month = month
         self.day = day
@@ -56,9 +62,7 @@ class nepdate(object):
         return not self > other
 
     def __add__(self, other):
-        """
-        Add operator for timedelta
-        """
+        """Adds nepdate with timedelta object"""
         year = self.year
         month = self.month
         day = self.day
@@ -89,9 +93,9 @@ class nepdate(object):
                     year += 1
 
     def __sub__(self, other):
-        """
-        Subtraction operator.
-        Returns a timedelta object
+        """Subtraction for nepdate. Subtraction can be done with either
+        timedelta object to obtain nepdate object or with nepdate object
+        to find timedelta object (number of days between the two dates)
         """
         if isinstance(other, timedelta):
             # Subtract number of days from the date
@@ -181,9 +185,7 @@ class nepdate(object):
 
     @classmethod
     def from_ad_date(cls, date):
-        """
-        Gets a nepdate object from gregorian calendar date
-        """
+        """ Gets a nepdate object from gregorian calendar date """
         functions.check_valid_ad_range(date)
         days = values.START_EN_DATE - date
 
@@ -193,45 +195,33 @@ class nepdate(object):
 
     @classmethod
     def from_bs_date(cls, year, month, day):
-        """
-        Create and update an nepdate object for bikram sambat date
-        """
+        """ Create and update an nepdate object for bikram sambat date """
         return nepdate(year, month, day).update()
 
     @classmethod
     def today(today):
-        """
-        Returns today's date in nepali calendar
-        """
+        """ Returns today's date in nepali calendar """
         return nepdate.from_ad_date(date.today())
 
     @classmethod
     def fromtimestamp(cls, timestamp):
-        """
-        Returns a nepdate object created from timestamp
-        """
+        """ Returns a nepdate object created from timestamp """
         return nepdate.from_ad_date(date.fromtimestamp(timestamp))
 
     def weekday(self):
-        """
-        Returns weekday for the date.
+        """ Returns weekday for the date.
         0 : Aaitabar
-        6 : Sanibar
-        """
+        6 : Sanibar """
         return (self.en_date.weekday() + 1) % 7
 
     def en_weekday(self):
-        """
-        Returns weekday with each week starting in monday
+        """ Returns weekday with each week starting in monday
         monday = 0
-        sunday = 7
-        """
+        sunday = 7 """
         return self.en_date.weekday()
 
     def update(self):
-        """
-        Updates information about the nepdate
-        """
+        """ Updates information about the nepdate """
         # Here's a trick to find the gregorian date:
         # We find the number of days from earliest nepali date to the current
         # day. We then add the number of days to the earliest english date
