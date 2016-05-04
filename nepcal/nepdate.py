@@ -191,6 +191,7 @@ class nepdate(object):
 
         # Add the required number of days to the start nepali date
         start_date = nepdate(values.START_NP_YEAR, 1, 1)
+        # No need to update as addition already calls update
         return start_date + (date - values.START_EN_DATE)
 
     @classmethod

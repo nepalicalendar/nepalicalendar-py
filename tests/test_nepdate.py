@@ -15,7 +15,8 @@ class NepdateTestCase(unittest.TestCase):
 
     def test_from_ad_date(self):
         np_date = nepdate.from_ad_date(date.today())
-        # self.assertEqual(np_date.year, date.today().year)
+        self.assertEqual(np_date, nepdate.today())
+        self.assertEqual(np_date.en_date, date.today())
 
     def test_update(self):
         np_date = nepdate.from_bs_date(2073, 1, 10)
