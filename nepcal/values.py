@@ -38,23 +38,33 @@ NEPALI_MONTH_NAMES_NE = {
 }
 
 NEPALI_WEEKDAY_NAMES_NE = {
-    1: u"आइतवार",
-    2: u"सोमवार",
-    3: u"मंगलवार",
-    4: u"वुधवार",
-    5: u"विहीवार",
-    6: u"शुक्रवार",
-    7: u"शनिवार",
+    0: u"आइतवार",
+    1: u"सोमवार",
+    2: u"मंगलवार",
+    3: u"वुधवार",
+    4: u"विहीवार",
+    5: u"शुक्रवार",
+    6: u"शनिवार",
+}
+
+NEPALI_WEEKDAY_NAMES_EN = {
+    0: u"Aaitabar",
+    1: u"Sombar",
+    2: u"Mangalbar",
+    3: u"Budhabar",
+    4: u"Bihibar",
+    5: u"Sukrabar",
+    6: u"Sanibar",
 }
 
 NEPALI_WEEKDAY_NAMES_SHORT_NE = {
-    1: u"आइत",
-    2: u"सोम",
-    3: u"मंगल",
-    4: u"वुध",
-    5: u"विही",
-    6: u"शुक्र",
-    1: u"शनि",
+    0: u"आइत",
+    1: u"सोम",
+    2: u"मंगल",
+    3: u"वुध",
+    4: u"विही",
+    5: u"शुक्र",
+    6: u"शनि",
 }
 
 # Number of days in months of each year

@@ -220,6 +220,26 @@ class nepdate(object):
         sunday = 7 """
         return self.en_date.weekday()
 
+    def en_weekday_name(self):
+        """ Gets the weekday name in English language. For eg. Aaitabar"""
+        return values.NEPALI_WEEKDAY_NAMES_EN[self.weekday()]
+
+    def weekday_name(self):
+        """ Gets the weekday name in Nepali language. For eg. आइतवार"""
+        return values.NEPALI_WEEKDAY_NAMES_NE[self.weekday()]
+
+    def weekday_name_short(self):
+        """ Gets the short weekday name in nepali language. For eg. आइत for आइतवार"""
+        return values.NEPALI_WEEKDAY_NAMES_SHORT_NE[self.weekday()]
+
+    def en_month_name(self):
+        """Gets the name of month in english language. For eg. Baisakh"""
+        return values.NEPALI_MONTH_NAMES_EN[self.month]
+
+    def month_name(self):
+        """Gets the name of month in nepali language. For eg. बैशाख"""
+        return values.NEPALI_MONTH_NAMES_NE[self.month]
+
     def update(self):
         """ Updates information about the nepdate """
         # Here's a trick to find the gregorian date:

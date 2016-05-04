@@ -177,5 +177,13 @@ class NepdateTestCase(unittest.TestCase):
             first_calc_date = added_date - timedelta(days=days)
             self.assertEqual(first_calc_date, np_date)
 
+    def test_names(self):
+        np_date = nepdate(2073, 12, 23).update()
+        self.assertEqual(np_date.en_weekday_name(), u"Budhabar")
+        self.assertEqual(np_date.weekday_name(), u"वुधवार")
+        self.assertEqual(np_date.weekday_name_short(), u'वुध')
+        self.assertEqual(np_date.en_month_name(), u'Chaitra')
+        self.assertEqual(np_date.month_name(), u'चैत्र')
+
 if __name__ == '__main__':
     unittest.main()
