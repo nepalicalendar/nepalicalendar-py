@@ -243,6 +243,7 @@ class nepdate(object):
 
     def update(self):
         """ Updates information about the nepdate """
+        functions.check_valid_bs_range(self)
         # Here's a trick to find the gregorian date:
         # We find the number of days from earliest nepali date to the current
         # day. We then add the number of days to the earliest english date
