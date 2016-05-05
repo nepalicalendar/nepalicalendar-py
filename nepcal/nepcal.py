@@ -34,11 +34,49 @@ class nepcal(object):
 
     @classmethod
     def itermonthdates(cls, year, month):
-        """Returns the nepdate objects of any month as a list"""
-        start = nepdate.from_bs_date(year, month, 1)
+        """
+        Returns an iterator for the month in a year
+        This iterator will return all days (as nepdate objects) for the month
+        and all days before the start of the month or after the end of the month
+        that are required to get a complete week.
+        """
+        curday = nepdate.from_bs_date(year, month, 1)
+        start_weekday = curday.weekday()
+        # Start_weekday represents the number of days we have to pad
+        for i in range(start_weekday, 0, -1):
+            yield (curday - timedelta(days=i))
 
         for i in range(0, values.NEPALI_MONTH_DAY_DATA[year][month - 1]):
             if i > 0:
-                start.day += 1
-                start.en_date = start.en_date + timedelta(days=1)
-            yield start
+                curday.day += 1
+                curday.en_date = curday.en_date + timedelta(days=1)
+            # Create a new object and return it
+            n_date = nepdate(curday.year, curday.month, curday.day)
+            n_date.en_date = curday.en_date
+            yield n_date
+        # Now, curday points to the last day of the month. Check it's weekday
+        # and return days from next month to complete the week
+        last_weekday = curday.weekday()
+        remain = 6 - last_weekday
+
+        for i in range(1, remain + 1):
+            yield (curday + timedelta(days=i))
+
+    @classmethod
+    def itermonthdays(cls, year, month):
+        """Similar to itermonthdates but returns day number instead of nepdate object
+        """
+        for day in nepcal.itermonthdates(year, month):
+            if day.month == month:
+                yield day.day
+            else:
+                yield 0
+    @classmethod
+    def monthdatescalendar(cls, year, month):
+        """ Returns a list of week in a month. A week is a list of nepdate objects """
+        week = []
+        for day in nepcal.itermonthdates(year, month):
+            week.append(day)
+            if len(week) == 7:
+                yield week
+                week = []

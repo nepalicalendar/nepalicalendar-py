@@ -70,7 +70,7 @@ class nepdate(object):
         days_remain = other.days
 
         if days_remain == 0:
-            return self
+            return nepdate(self.year, self.month, self.day).update()
         elif days_remain < 0:
             return self - (other * -1)
 
