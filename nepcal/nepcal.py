@@ -85,12 +85,16 @@ class nepcal(object):
     @classmethod
     def monthdatescalendar(cls, year, month):
         """ Returns a list of week in a month. A week is a list of nepdate objects """
+        weeks = []
         week = []
         for day in nepcal.itermonthdates(year, month):
             week.append(day)
             if len(week) == 7:
-                yield week
+                weeks.append(week)
                 week = []
+        if len(week) > 0:
+            weeks.append(week)
+        return weeks
 
     @classmethod
     def monthdayscalendar(cls, year, month):
@@ -103,6 +107,8 @@ class nepcal(object):
             if len(week) == 7:
                 weeks.append(week)
                 week = []
+        if len(week) > 0:
+            weeks.append(week)
         return weeks
 
     @classmethod
@@ -116,4 +122,6 @@ class nepcal(object):
             if len(week) == 7:
                 weeks.append(week)
                 week = []
+        if len(week) > 0:
+            weeks.append(week)
         return weeks
