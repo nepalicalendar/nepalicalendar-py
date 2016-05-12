@@ -71,6 +71,17 @@ class nepcal(object):
                 yield day.day
             else:
                 yield 0
+
+    @classmethod
+    def itermonthdays2(cls, year, month):
+        """Similar to itermonthdays2 but returns tuples of day and weekday.
+        """
+        for day in nepcal.itermonthdates(year, month):
+            if day.month == month:
+                yield (day.day, day.weekday())
+            else:
+                yield 0
+
     @classmethod
     def monthdatescalendar(cls, year, month):
         """ Returns a list of week in a month. A week is a list of nepdate objects """

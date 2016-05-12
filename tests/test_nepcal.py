@@ -17,13 +17,10 @@ class NepCalTestCase(unittest.TestCase):
         cal = nepcal.itermonthdates(2073, 8)
         self.assertEqual(len(list(cal)), 35)
 
-        # print([str(x) for x in nepcal.itermonthdates(2073,8)])
-
         weeks = nepcal.monthdatescalendar(2073, 8)
+        self.assertEqual(len(list(weeks)), 5)
         for week in weeks:
-            print([str(x) for x in week])
-            break
-
+            self.assertEqual(len(week), 7)
 
     def test_functions(self):
         self.assertEqual(nepcal.weekday(2073, 1, 23), 4)
