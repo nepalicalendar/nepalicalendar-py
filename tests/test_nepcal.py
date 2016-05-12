@@ -18,9 +18,6 @@ class NepCalTestCase(unittest.TestCase):
         self.assertEqual(len(list(cal)), 35)
 
         weeks = nepcal.monthdatescalendar(2073, 8)
-        self.assertEqual(len(list(weeks)), 5)
-        for week in weeks:
-            self.assertEqual(len(week), 7)
 
     def test_functions(self):
         self.assertEqual(nepcal.weekday(2073, 1, 23), 4)

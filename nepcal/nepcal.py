@@ -80,7 +80,7 @@ class nepcal(object):
             if day.month == month:
                 yield (day.day, day.weekday())
             else:
-                yield 0
+                yield (0, day.weekday())
 
     @classmethod
     def monthdatescalendar(cls, year, month):
@@ -91,3 +91,29 @@ class nepcal(object):
             if len(week) == 7:
                 yield week
                 week = []
+
+    @classmethod
+    def monthdayscalendar(cls, year, month):
+        """Return a list of the weeks in the month month of the year as full weeks.
+        Weeks are lists of seven day numbers."""
+        weeks = []
+        week = []
+        for day in nepcal.itermonthdays(year, month):
+            week.append(day)
+            if len(week) == 7:
+                weeks.append(week)
+                week = []
+        return weeks
+
+    @classmethod
+    def monthdays2calendar(cls, year, month):
+        """ Return a list of the weeks in the month month of the year as full weeks.
+        Weeks are lists of seven tuples of day numbers and weekday numbers. """
+        weeks = []
+        week = []
+        for day in nepcal.itermonthdays2(year, month):
+            week.append(day)
+            if len(week) == 7:
+                weeks.append(week)
+                week = []
+        return weeks
