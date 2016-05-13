@@ -3,7 +3,6 @@
 Defines the nepdate class
 """
 
-import sys
 from datetime import date, timedelta
 from . import values, functions
 

@@ -3,8 +3,7 @@
 Defines the nepcal class
 """
 
-import sys
-from datetime import date, timedelta
+from datetime import timedelta
 from . import values, functions, nepdate
 
 

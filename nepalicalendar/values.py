@@ -4,7 +4,6 @@ Defines different constant values for use in
 nepalicalendar
 """
 
-import sys
 import datetime
 
 NEPALI_MONTH_NAMES_EN = {
