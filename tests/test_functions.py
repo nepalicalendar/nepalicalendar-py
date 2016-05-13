@@ -13,6 +13,7 @@ class FunctionsTestCase(unittest.TestCase):
     """
     Tests for functions
     """
+
     def test_values_ad_range(self):
         self.assertTrue(
             check_valid_ad_range(
@@ -25,7 +26,6 @@ class FunctionsTestCase(unittest.TestCase):
                 date(2034, 4, 13)
             )
         )
-
 
         # Invalid dates
         with self.assertRaises(ValueError):
@@ -42,9 +42,6 @@ class FunctionsTestCase(unittest.TestCase):
             check_valid_ad_range(
                 date(2034, 4, 14)
             )
-
-
-
 
     def test_values_bs_range(self):
         self.assertTrue(
@@ -82,7 +79,6 @@ class FunctionsTestCase(unittest.TestCase):
                 nepdate(2078, 8, 30)
             )
 
-
         self.assertTrue(
             check_valid_bs_range(
                 nepdate(2000, 1, 30)
@@ -94,7 +90,6 @@ class FunctionsTestCase(unittest.TestCase):
                 nepdate(2064, 3, 32)
             )
         )
-
 
 
 if __name__ == '__main__':
