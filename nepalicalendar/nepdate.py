@@ -3,7 +3,6 @@
 Defines the nepdate class
 """
 
-import sys
 from datetime import date, timedelta
 from . import values, functions
 
@@ -38,19 +37,11 @@ class nepdate(object):
             self.day == other.day
 
     def __gt__(self, other):
-        if self.year > other.year:
-            return True
-        elif self.year < other.year:
-            return False
-        else:
-            if self.month > other.month:
-                return True
-            elif self.month < other.month:
-                return False
-            else:
-                if self.day > other.day:
-                    return True
-                return False
+        if self.year == other.year:
+            if self.month == other.month:
+                return self.day > other.day
+            return self.month > other.month
+        return self.year > other.year
 
     def __ge__(self, other):
         return self == other or self > other
