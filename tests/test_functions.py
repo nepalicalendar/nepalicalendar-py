@@ -5,8 +5,8 @@ from __future__ import unicode_literals
 import unittest
 from datetime import date
 
-from nepcal.functions import check_valid_bs_range, check_valid_ad_range
-from nepcal import nepdate
+from nepalicalendar.functions import check_valid_bs_range, check_valid_ad_range
+from nepalicalendar import nepdate
 
 
 class FunctionsTestCase(unittest.TestCase):

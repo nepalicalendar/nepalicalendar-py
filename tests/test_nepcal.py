@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 import unittest
-from nepcal import *
+from nepalicalendar import *
 from datetime import date, timedelta
 from random import randint
 
