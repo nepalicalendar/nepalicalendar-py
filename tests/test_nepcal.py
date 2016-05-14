@@ -10,14 +10,14 @@ from random import randint
 
 class NepCalTestCase(unittest.TestCase):
     """
-    Tests for nepcal class
+    Tests for NepCal class
     """
 
     def test_iter_month(self):
-        cal = nepcal.itermonthdates(2073, 8)
+        cal = NepCal.itermonthdates(2073, 8)
         self.assertEqual(len(list(cal)), 35)
 
-        weeks = nepcal.monthdatescalendar(2073, 8)
+        weeks = NepCal.monthdatescalendar(2073, 8)
 
     def test_functions(self):
-        self.assertEqual(nepcal.weekday(2073, 1, 23), 4)
+        self.assertEqual(NepCal.weekday(2073, 1, 23), 4)

@@ -6,3 +6,6 @@
 
 # temporary files created by git/patch
 *.orig
+
+MANIFEST
+dist
