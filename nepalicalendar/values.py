@@ -6,7 +6,7 @@ nepalicalendar
 
 import datetime
 
-NEPDIGITS = ['०','१','२','३','४','५','६','७','८','९']
+NEPDIGITS = [u'०',u'१',u'२',u'३',u'४',u'५',u'६',u'७',u'८',u'९']
 
 NEPALI_MONTH_NAMES_EN = {
     1: u"Baisakh",
