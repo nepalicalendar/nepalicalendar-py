@@ -190,7 +190,7 @@ class NepDateTestCase(unittest.TestCase):
         self.assertEqual(np_date.weekday_name(), u"वुधवार")
         self.assertEqual(np_date.weekday_name_short(), u'वुध')
         self.assertEqual(np_date.en_month_name(), u'Chaitra')
-        self.assertEqual(np_date.month_name(), u'चैत्र')
+        self.assertEqual(np_date.month_name(), u'चैत')
 
 if __name__ == '__main__':
     unittest.main()
