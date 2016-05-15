@@ -174,6 +174,28 @@ class NepDate(object):
         total_days = timedelta(days=greater.day - smaller.day)
         return total_days
 
+    @property
+    def ne_day(self):
+        """
+        Day in nepali digits
+        """
+        return functions.nepali_number(self.day)
+
+    @property
+    def ne_month(self):
+        """
+        Month in nepali digits
+        """
+        return functions.nepali_number(self.month)
+
+    @property
+    def ne_year(self):
+        """
+        Year in nepali digits
+        """
+        return functions.nepali_number(self.year)
+
+
     @classmethod
     def from_ad_date(cls, date):
         """ Gets a NepDate object from gregorian calendar date """

@@ -13,6 +13,12 @@ class NepDateTestCase(unittest.TestCase):
     Tests for NepDate class
     """
 
+    def test_properties(self):
+        np_date = NepDate(2071,12,23)
+        self.assertEqual(np_date.ne_day, "२३")
+        self.assertEqual(np_date.ne_month, "१२")
+        self.assertEqual(np_date.ne_year, "२०७१")
+
     def test_from_ad_date(self):
         np_date = NepDate.from_ad_date(date.today())
         self.assertEqual(np_date, NepDate.today())

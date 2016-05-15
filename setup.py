@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
     name='nepalicalendar',
     packages=['nepalicalendar'],
-    version='0.2',
+    version='0.3',
     description='Nepali Calendar Library',
     author='Anup Pokhrel',
     author_email='virtualanup@gmail.com',
