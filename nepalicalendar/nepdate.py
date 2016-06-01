@@ -4,7 +4,7 @@ Defines the NepDate class
 """
 
 from datetime import date, timedelta
-from . import values, functions
+from . import values, functions, tithis
 
 
 class NepDate(object):
@@ -195,6 +195,10 @@ class NepDate(object):
         """
         return functions.nepali_number(self.year)
 
+    @property
+    def tithi(self):
+        # Returns the tithi of the current day if possible
+        return tithis.TITHIS[self.year][self.month-1][self.day-1]
 
     @classmethod
     def from_ad_date(cls, date):
@@ -253,6 +257,11 @@ class NepDate(object):
     def month_name(self):
         """Gets the name of month in nepali language. For eg. बैशाख"""
         return values.NEPALI_MONTH_NAMES_NE[self.month]
+
+    def ne_tithi_name(self):
+        """Nepali name for the tithi
+        """
+        return tithis.NE_TITHI_NAMES[self.tithi]
 
     def update(self):
         """ Updates information about the NepDate """

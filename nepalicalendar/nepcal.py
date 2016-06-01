@@ -28,7 +28,7 @@ class NepCal(object):
     @classmethod
     def monthrange(cls, year, month):
         """Returns the number of days in a month"""
-        functions.check_valid_bs_range(year, month, 1)
+        functions.check_valid_bs_range(NepDate(year, month, 1))
         return values.NEPALI_MONTH_DAY_DATA[year][month - 1]
 
     @classmethod
