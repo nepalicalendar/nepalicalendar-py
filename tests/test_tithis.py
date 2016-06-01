@@ -32,7 +32,7 @@ class TithisTestCase(unittest.TestCase):
         #TODO: Add more tithi tests
 
     def test_nepdate_tithi_name(self):
-        self.assertEqual(NepDate(2069,4,15).ne_tithi_name(),"द्वादशी")
+        self.assertEqual(NepDate(2069,4,15).ne_tithi_name(),u"द्वादशी")
         pass
 
 
