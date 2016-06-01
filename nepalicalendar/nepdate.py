@@ -5,6 +5,7 @@ Defines the NepDate class
 
 from datetime import date, timedelta
 from . import values, functions, tithis
+from . import events
 
 
 class NepDate(object):
@@ -262,6 +263,28 @@ class NepDate(object):
         """Nepali name for the tithi
         """
         return tithis.NE_TITHI_NAMES[self.tithi]
+
+    def events_list(self):
+        """ Returns the events today """
+        evt = []
+        evt.extend(events.NEPALI_EVENTS[self.month, self.day])
+        evt.extend(events.ENGLISH_EVENTS[self.en_date.month, self.en_date.day])
+        return evt
+
+    def events_name(self):
+        """Returns the name of events"""
+        return [name for name,holiday in self.events_list()]
+
+    def is_event_holiday(self):
+        """Returns if it is holiday due to an event today"""
+        return any([holiday for event, holiday in self.events_list()])
+
+    def is_holiday(self):
+        """Returns if it is holiday today
+        It is holiday if it is sanibar or if there is some
+        event """
+        return self.weekday()==6 or self.is_event_holiday()
+
 
     def update(self):
         """ Updates information about the NepDate """
