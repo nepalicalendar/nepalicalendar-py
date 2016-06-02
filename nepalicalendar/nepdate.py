@@ -199,6 +199,8 @@ class NepDate(object):
     @property
     def tithi(self):
         # Returns the tithi of the current day if possible
+        if self.year < tithis.FIRST_TITHI_YEAR or self.year > tithis.LAST_TITHI_YEAR:
+                raise ValueError("Year of range for tithi")
         return tithis.TITHIS[self.year][self.month-1][self.day-1]
 
     @classmethod

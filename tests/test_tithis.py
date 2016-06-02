@@ -29,6 +29,12 @@ class TithisTestCase(unittest.TestCase):
     def test_nepdate_tithi(self):
         d = NepDate(2069,2,3)
         self.assertEqual(d.tithi, 11)
+        with self.assertRaises(ValueError):
+            a = NepDate(2031,1,1).update().tithi
+
+        with self.assertRaises(ValueError):
+            a = NepDate(2091,1,1).update().tithi
+
         #TODO: Add more tithi tests
 
     def test_nepdate_tithi_name(self):
