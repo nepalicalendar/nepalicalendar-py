@@ -14,7 +14,7 @@ class NepDateTestCase(unittest.TestCase):
     """
 
     def test_properties(self):
-        np_date = NepDate(2071,12,23)
+        np_date = NepDate(2071, 12, 23)
         self.assertEqual(np_date.ne_day, "२३")
         self.assertEqual(np_date.ne_month, "१२")
         self.assertEqual(np_date.ne_year, "२०७१")

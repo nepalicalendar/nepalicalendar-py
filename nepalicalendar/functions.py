@@ -28,6 +28,7 @@ def check_valid_bs_range(date):
         raise ValueError(ERR_MSG)
     return True
 
+
 def nepali_number(number):
     """
     Convert a number to nepali

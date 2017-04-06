@@ -19,26 +19,24 @@ class TithisTestCase(unittest.TestCase):
         """
         for i in range(2040, 2071):
             self.assertEqual(len(TITHIS[i]), 12)
-            for j in range(1,13):
+            for j in range(1, 13):
                 try:
-                    self.assertEqual(len(TITHIS[i][j-1]), NepCal.monthrange(i,j))
+                    self.assertEqual(len(TITHIS[i][j - 1]), NepCal.monthrange(i, j))
                 except:
                     print("Error in year %d month %d" % (i, j))
                     raise
 
     def test_nepdate_tithi(self):
-        d = NepDate(2069,2,3)
+        d = NepDate(2069, 2, 3)
         self.assertEqual(d.tithi, 11)
         with self.assertRaises(ValueError):
-            a = NepDate(2031,1,1).update().tithi
+            a = NepDate(2031, 1, 1).update().tithi
 
         with self.assertRaises(ValueError):
-            a = NepDate(2091,1,1).update().tithi
+            a = NepDate(2091, 1, 1).update().tithi
 
-        #TODO: Add more tithi tests
+        # TODO: Add more tithi tests
 
     def test_nepdate_tithi_name(self):
-        self.assertEqual(NepDate(2069,4,15).ne_tithi_name(),u"द्वादशी")
+        self.assertEqual(NepDate(2069, 4, 15).ne_tithi_name(), u"द्वादशी")
         pass
-
-
