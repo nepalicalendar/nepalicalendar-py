@@ -176,6 +176,10 @@ class NepDate(object):
         return total_days
 
     @property
+    def date(self):
+        return "%d-%02d-%02d" % (self.year, self.month, self.day)
+
+    @property
     def ne_day(self):
         """
         Day in nepali digits
@@ -200,8 +204,8 @@ class NepDate(object):
     def tithi(self):
         # Returns the tithi of the current day if possible
         if self.year < tithis.FIRST_TITHI_YEAR or self.year > tithis.LAST_TITHI_YEAR:
-                raise ValueError("Year of range for tithi")
-        return tithis.TITHIS[self.year][self.month-1][self.day-1]
+            raise ValueError("Year of range for tithi")
+        return tithis.TITHIS[self.year][self.month - 1][self.day - 1]
 
     @classmethod
     def from_ad_date(cls, date):
@@ -275,7 +279,7 @@ class NepDate(object):
 
     def events_name(self):
         """Returns the name of events"""
-        return [name for name,holiday in self.events_list()]
+        return [name for name, holiday in self.events_list()]
 
     def is_event_holiday(self):
         """Returns if it is holiday due to an event today"""
@@ -285,8 +289,7 @@ class NepDate(object):
         """Returns if it is holiday today
         It is holiday if it is sanibar or if there is some
         event """
-        return self.weekday()==6 or self.is_event_holiday()
-
+        return self.weekday() == 6 or self.is_event_holiday()
 
     def update(self):
         """ Updates information about the NepDate """
