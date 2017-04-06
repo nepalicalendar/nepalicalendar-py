@@ -6,7 +6,7 @@ import unittest
 from datetime import date
 
 from nepalicalendar.functions import check_valid_bs_range, check_valid_ad_range
-from nepalicalendar import nepdate
+from nepalicalendar import NepDate
 
 
 class FunctionsTestCase(unittest.TestCase):
@@ -46,48 +46,48 @@ class FunctionsTestCase(unittest.TestCase):
     def test_values_bs_range(self):
         self.assertTrue(
             check_valid_bs_range(
-                nepdate(2000, 1, 1)
+                NepDate(2000, 1, 1)
             )
         )
 
         # Year less than min year
         with self.assertRaises(ValueError):
             check_valid_bs_range(
-                nepdate(1999, 12, 30)
+                NepDate(1999, 12, 30)
             )
 
         # Year greater than max year
         with self.assertRaises(ValueError):
             check_valid_bs_range(
-                nepdate(2100, 1, 1)
+                NepDate(2100, 1, 1)
             )
 
         # Month not in range
         with self.assertRaises(ValueError):
             check_valid_bs_range(
-                nepdate(2050, 13, 1)
+                NepDate(2050, 13, 1)
             )
 
         # Day not in range
         with self.assertRaises(ValueError):
             check_valid_bs_range(
-                nepdate(2000, 1, 31)
+                NepDate(2000, 1, 31)
             )
 
         with self.assertRaises(ValueError):
             check_valid_bs_range(
-                nepdate(2078, 8, 30)
+                NepDate(2078, 8, 30)
             )
 
         self.assertTrue(
             check_valid_bs_range(
-                nepdate(2000, 1, 30)
+                NepDate(2000, 1, 30)
             )
         )
 
         self.assertTrue(
             check_valid_bs_range(
-                nepdate(2064, 3, 32)
+                NepDate(2064, 3, 32)
             )
         )
 

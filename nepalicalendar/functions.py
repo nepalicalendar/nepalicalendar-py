@@ -27,3 +27,12 @@ def check_valid_bs_range(date):
     if date.day < 1 or date.day > values.NEPALI_MONTH_DAY_DATA[date.year][date.month - 1]:
         raise ValueError(ERR_MSG)
     return True
+
+def nepali_number(number):
+    """
+    Convert a number to nepali
+    """
+    nepnum = ""
+    for n in str(number):
+        nepnum += values.NEPDIGITS[int(n)]
+    return nepnum
