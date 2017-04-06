@@ -176,6 +176,10 @@ class NepDate(object):
         return total_days
 
     @property
+    def date(self):
+        return "%d-%02d-%02d" % (self.year, self.month, self.day)
+
+    @property
     def ne_day(self):
         """
         Day in nepali digits
